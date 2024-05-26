@@ -21,10 +21,13 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                \Log::info('User is authenticated', ['guard' => $guard]);
                 return redirect(RouteServiceProvider::HOME);
             }
         }
-
+    
+        \Log::info('User is not authenticated', ['guards' => $guards]);
         return $next($request);
     }
 }
+
