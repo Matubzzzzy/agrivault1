@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Homepage</title>
+    <title>AgriVault Homepage</title>
     <link rel="stylesheet" href="{{ asset('/user_homepage_styles.css') }}">
 </head>
 <body>
@@ -12,13 +12,20 @@
             <h1>Welcome to Your User Homepage</h1>
             <nav>
                 <ul>
-                    <li><a href="route('profile.show')">Profile</a></li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <li><a href="{{ route('profile.edit') }}">Reset Password</a></li>
+                <li><a href="{{ asset('lockscreen.html') }}">Lock Screen</a></li>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                    
+                <li>
+                    <a href="{{ route('logout') }}" 
+                        onclick="event.preventDefault(); 
+                        document.getElementById('logout-form').submit();">
                         Logout
-                    </a></li>
+                    </a>
+                </li>
                 </ul>
             </nav>
         </header>

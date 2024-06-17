@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ Route::get('/dashboard', function () {
 // });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    // Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -79,6 +80,27 @@ Route::post('/logout', function (Request $request) {
 
     return redirect('/');
 })->name('logout');
+
+// Route::get('/reset-password/{token}', function (Illuminate\Http\Request $request, $token) {
+//     return view('auth.passwords.reset', ['request' => $request, 'token' => $token]);
+// })->name('password.reset');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
+
+
+Route::get('/', function () {
+    return view('welcome'); // Ensure you have a 'welcome.blade.php' in 'resources/views'
+})->name('welcome');
+
+// Route::get('/', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'prevent-back-history'], function() {
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/profile', 'ProfileController@show')->name('profile.edit');
+    Route::get('/settings', 'SettingsController@index')->name('settings.index');
+});
+
+
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 
 

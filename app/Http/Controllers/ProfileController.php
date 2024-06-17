@@ -11,11 +11,11 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function show()
-    {
-        $user = Auth::user();
-        return view('profile.show', compact('user'));
-    }
+    // public function show()
+    // {
+    //     $user = Auth::user();
+    //     return view('profile.show', compact('user'));
+    // }
 
     public function edit()
     {
@@ -44,7 +44,7 @@ class ProfileController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
-        return redirect()->route('profile.show')->with('status', 'profile-updated');
+        return redirect()->route('profile.edit')->with('status', 'profile-updated');
     }
 
     public function destroy(Request $request)
