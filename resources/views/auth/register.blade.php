@@ -15,6 +15,30 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+<br>
+        <!-- Role -->
+        <div class="form-group row">
+            <!-- <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label> -->
+            <x-input-label for="role" :value="__('What is your role?')" />
+
+            <div class="flex items-center mt-1">
+                <div class="form-check form-check-inline mr-4">
+                <input class="form-check-input" type="radio" name="role" id="farmer" value="2" required>
+                <label class="form-check-label" for="farmer">
+                    {{ __('Farmer') }}
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="role" id="facility" value="1">
+                <label class="form-check-label" for="facility">
+                    {{ __('Facility Admin') }}
+                </label>
+            </div>
+
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+            
+            </div>
+        </div>
 
         <!-- Password -->
         <div class="mt-4">

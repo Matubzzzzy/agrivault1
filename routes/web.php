@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -72,6 +74,21 @@ Route::middleware(['auth', 'nocache'])->group(function () {
     // Add other routes that should be protected and not cached
 });
 
+// Admin routes
+Route::middleware(['auth', 'role:1'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
+// User routes
+Route::middleware(['auth', 'role:2'])->group(function () {
+    Route::get('/home', [UserController::class, 'index'])->name('user.home');
+});
+
+// Default home route (for authenticated users without a specific role)
+// Route::get('/home', function () {
+//     return view('home');
+// })->middleware('auth');
+
 Route::post('/logout', function (Request $request) {
     Auth::logout();
 
@@ -94,15 +111,19 @@ Route::get('/', function () {
 
 // Route::get('/', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'prevent-back-history'], function() {
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    // Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/profile', 'ProfileController@show')->name('profile.edit');
     Route::get('/settings', 'SettingsController@index')->name('settings.index');
 });
 
+Route::middleware(['prevent-back-history'])->group(function () {
+    Route::get('/profile', 'ProfileController@show');
+});
 
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 require __DIR__.'/auth.php';
 

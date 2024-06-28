@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f9f0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    color: white;
+}
+
+.nav-left h1 {
+    margin: 0;
+}
+
+.nav-right button {
+    background-color: #66BB6A;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-right button:hover {
+    background-color: #388E3C;
+}
+
+.hidden {
+    display: none;
+}
+
+section {
+    padding: 20px;
+}
+
+h2 {
+    color: #388E3C;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat {
+    background-color: white;
+    border: 1px solid #66BB6A;
+    border-radius: 5px;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+}
+
+#add-facility-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#add-facility-form input, #add-facility-form button {
+    padding: 10px;
+    border: 1px solid #66BB6A;
+    border-radius: 5px;
+}
+
+#add-facility-form button {
+    background-color: #66BB6A;
+    color: white;
+    cursor: pointer;
+}
+
+#add-facility-form button:hover {
+    background-color: #388E3C;
+}
+
+#facilities-list, #requests-list {
+    background-color: white;
+    border: 1px solid #66BB6A;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.facility, .request {
+    border-bottom: 1px solid #66BB6A;
+    padding: 10px 0;
+}
+
+.facility:last-child, .request:last-child {
+    border-bottom: none;
+}
+
+.facility img {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

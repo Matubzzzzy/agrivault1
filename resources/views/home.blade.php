@@ -12,7 +12,7 @@
             <h1>Welcome to Your User Homepage</h1>
             <nav>
                 <ul>
-                <li><a href="{{ route('profile.edit') }}">Reset Password</a></li>
+                <li><a href="{{ route('profile.edit') }}">Update Profile</a></li>
                 <li><a href="{{ asset('lockscreen.html') }}">Lock Screen</a></li>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
