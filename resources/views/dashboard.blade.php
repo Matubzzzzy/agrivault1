@@ -25,12 +25,18 @@
         </div>
     </nav>
     
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <section id="dashboard-section">
         <h2>Dashboard Overview</h2>
         <div class="stats">
             <div class="stat">
                 <h3>Number of Facilities</h3>
-                <p id="facility-count">0</p>
+                <p id="facility-count">{{ $facilities->count() }}</p>
             </div>
             <div class="stat">
                 <h3>Recent Requests</h3>
@@ -40,25 +46,57 @@
     </section>
     
     <section id="manage-facilities-section" class="hidden">
-        <h2>Manage Facilities</h2>
-        <form id="add-facility-form">
-            <input type="text" id="facility-name" placeholder="Facility Name" required>
-            <input type="text" id="facility-address" placeholder="Facility Address" required>
-            <input type="email" id="facility-contact" placeholder="Facility Contact" required>
-            <input type="file" id="facility-image" accept="image/*" required>
-            <button type="submit">Add Facility</button>
-        </form>
-        <div id="facilities-list"></div>
-    </section>
+    <h2>Manage Facilities</h2>
+    <form id="add-facility-form" method="POST" action="{{ route('storage-facilities.store') }}">
+        @csrf
+        <input type="text" class="form-control" id="name" name="name" placeholder="Facility Name" required>
+        <input type="text" class="form-control" id="location" name="location" placeholder="Facility Address" required>
+        <textarea class="form-control" id="description" name="description" placeholder="Description" required></textarea>
+        <input type="text" class="form-control" id="contacts" name="contacts" placeholder="Facility Contact" required>
+        <button type="submit" class="btn btn-primary">{{ __('Add Facility') }}</button>
+    </form>
+
+    <hr>
+
+    <h3>{{ __('Existing Facilities') }}</h3>
+    <div id="facilities-list">
+        
+        @if($facilities->isEmpty())
+            <p>{{ __('No facilities available.') }}</p>
+        @else
+            <div class="facilities-container">
+                @foreach($facilities as $facility)
+                    <div class="facility">
+                        <img src="{{ asset('images/facility_placeholder.png') }}" alt="{{ $facility->name }}">
+                        <div>
+                            <h3>{{ $facility->name }}</h3>
+                            <p>{{ $facility->location }}</p>
+                            <p>{{ $facility->description }}</p>
+                            <p>Contact: {{ $facility->contacts }}</p>
+                            <button href="javascript:void(0);" onclick="editFacility({{ $facility->id }})" class="btn btn-sm btn-warning">{{ __('Edit') }}</button>
+                            <form action="{{ route('storage-facilities.destroy', $facility->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
+                            </form>
+                            <hr>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+</section>
+
     
     <section id="user-requests-section" class="hidden">
         <h2>User Requests</h2>
         <div id="requests-list"></div>
     </section>
     
-    <footer>
+    <!-- <footer>
         <p>Contact Support: admin@agrivault.com | +123-456-7890</p>
-    </footer>
+    </footer> -->
 
     <script src="admin_script.js"></script>
 </body>

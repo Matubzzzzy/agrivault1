@@ -65,7 +65,8 @@ h2 {
     margin-bottom: 20px;
 }
 
-#add-facility-form input, #add-facility-form button {
+#add-facility-form input, #add-facility-form button, #add-facility-form textarea {
+    font-family: Arial, sans-serif;
     padding: 10px;
     border: 1px solid #66BB6A;
     border-radius: 5px;
@@ -89,7 +90,7 @@ h2 {
 }
 
 .facility, .request {
-    border-bottom: 1px solid #66BB6A;
+    /* border-bottom: 1px solid #66BB6A; */
     padding: 10px 0;
 }
 

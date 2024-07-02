@@ -17,16 +17,16 @@ function showSection(sectionId) {
     document.getElementById(sectionId).classList.remove('hidden');
 }
 
-// Example data to demonstrate functionality
-let facilities = [
-    { name: 'Green Acres Storage', address: '123 Green St', contact: 'info@greenacres.com', imgSrc: 'image1.jpg' },
-    { name: 'Harvest Storage', address: '456 Harvest Rd', contact: 'info@harveststorage.com', imgSrc: 'image2.jpg' },
-];
+// Remove or comment out example data
+// let facilities = [
+//     { name: 'Green Acres Storage', address: '123 Green St', contact: 'info@greenacres.com', imgSrc: 'image1.jpg' },
+//     { name: 'Harvest Storage', address: '456 Harvest Rd', contact: 'info@harveststorage.com', imgSrc: 'image2.jpg' },
+// ];
 
-let requests = [
-    { user: 'John Doe', facility: 'Green Acres Storage', date: '2024-06-17' },
-    { user: 'Jane Smith', facility: 'Harvest Storage', date: '2024-06-18' },
-];
+// let requests = [
+//     { user: 'John Doe', facility: 'Green Acres Storage', date: '2024-06-17' },
+//     { user: 'Jane Smith', facility: 'Harvest Storage', date: '2024-06-18' },
+// ];
 
 document.getElementById('facility-count').textContent = facilities.length;
 document.getElementById('request-count').textContent = requests.length;
@@ -70,22 +70,22 @@ function renderRequests() {
     });
 }
 
-function addFacility(event) {
-    event.preventDefault();
-    const name = document.getElementById('facility-name').value;
-    const address = document.getElementById('facility-address').value;
-    const contact = document.getElementById('facility-contact').value;
-    const imgSrc = URL.createObjectURL(document.getElementById('facility-image').files[0]);
+// Comment out or remove this function to handle form submission via the server
+// function addFacility(event) {
+//     event.preventDefault();
+//     const name = document.getElementById('facility-name').value;
+//     const address = document.getElementById('facility-address').value;
+//     const contact = document.getElementById('facility-contact').value;
+//     const imgSrc = URL.createObjectURL(document.getElementById('facility-image').files[0]);
     
-    facilities.push({ name, address, contact, imgSrc });
-    document.getElementById('facility-count').textContent = facilities.length;
-    renderFacilities();
-    document.getElementById('add-facility-form').reset();
-}
+//     facilities.push({ name, address, contact, imgSrc });
+//     document.getElementById('facility-count').textContent = facilities.length;
+//     renderFacilities();
+//     document.getElementById('add-facility-form').reset();
+// }
 
-function editFacility(index) {
-    // Logic to edit facility
-    alert(`Edit facility: ${facilities[index].name}`);
+function editFacility(facilityId) {
+    window.location.href = `/storage-facilities/${facilityId}/info_edit`;
 }
 
 function deleteFacility(index) {
@@ -94,7 +94,11 @@ function deleteFacility(index) {
     renderFacilities();
 }
 
-document.getElementById('add-facility-form').addEventListener('submit', addFacility);
+// Ensure form submission is handled by the backend
+document.getElementById('add-facility-form').addEventListener('submit', function(event) {
+    // Allow the form to be submitted to the server
+});
 
-renderFacilities();
-renderRequests();
+// Remove these calls to avoid using example data
+// renderFacilities();
+// renderRequests();

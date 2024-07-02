@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StorageFacilityController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +126,13 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+Route::post('/storage-facilities', [AdminController::class, 'store'])->name('storage-facilities.store');
+Route::get('/storage-facilities/{id}/info_edit', [AdminController::class, 'edit'])->name('storage-facilities.edit');
+Route::put('/storage-facilities/{id}', [AdminController::class, 'update'])->name('storage-facilities.update');
+Route::delete('/storage-facilities/{id}', [AdminController::class, 'destroy'])->name('storage-facilities.destroy');
+
 
 require __DIR__.'/auth.php';
 
