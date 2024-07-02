@@ -7,9 +7,8 @@
 
 AgriVault is a platform aimed at facilitating the connection between farmers and storage facilities, providing a user-friendly interface for farmers to explore and access reliable agricultural storage options. 
 
-Idea inception: https://www.researchgate.net/publication/351764965_Complete_Guide_to_Agricultural_Product_Processing_and_Storage_Complete_Guide_to_Agricultural_Product_Processing_and_Storage
 
-This repository contains the source code for the AgriVault website, which offers features such as:
+This repository contains the source code for the AgriVault application, which offers features such as:
 
 - User Registration: Farmers can create accounts on AgriVault to access the platform's features.
 - Storage Facility Listings: AgriVault provides a comprehensive listing of storage facilities, allowing farmers to browse and compare options based on their needs and location.
