@@ -29,3 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware('auth')->get('/user_home', function () {
+    return view('user_home');
+})->name('user_home');
