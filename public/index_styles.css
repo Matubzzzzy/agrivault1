@@ -341,3 +341,82 @@ footer#agrivault-footer .footer-links a {
 footer#agrivault-footer .footer-links a:hover {
     color: #fff;
 }
+
+.search-section {
+    padding: 40px 20px;
+    background: #f4f4f4;
+    text-align: left;
+}
+
+.search-section h2, .search-section h3 {
+    color: #2c6e49; /* Green color for headings */
+    margin-bottom: 1em; /* Spacing below headings */
+}
+
+.search-section a.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4caf50; /* Button background color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-section a.btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.location-dropdown {
+    margin: 1em 0; /* Spacing around dropdown */
+    max-width: 600px; /* Limit dropdown width */
+    margin: 0 auto; /* Center dropdown */
+}
+
+.location-dropdown label {
+    color: #2c6e49; /* Green color for label */
+    margin-right: 10px; /* Space between label and dropdown */
+}
+
+.location-dropdown select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Full width dropdown */
+}
+
+#facilities-list {
+    margin-top: 2em; /* Spacing above facilities list */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Stretch out facilities */
+}
+
+.facility {
+   padding: 40px 20px;
+    background: #f4f4f4;
+    text-align: left;
+}
+
+
+
+.facility img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 1em; /* Space below image */
+}
+
+.facility h3 {
+    color: #2c6e49; /* Green color for facility name */
+    margin-bottom: 0.5em; /* Spacing below facility name */
+}
+
+.facility p {
+    margin-bottom: 0.5em; /* Spacing below paragraphs */
+}
+
+.facility hr {
+    margin-top: 1em; /* Spacing above horizontal line */
+    border: none;
+    border-top: 1px solid #ccc; /* Light grey line */
+}

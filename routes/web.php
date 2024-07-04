@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StorageFacilityController;
+use App\Http\Controllers\BookingController;
 
 
 /*
@@ -133,6 +134,10 @@ Route::get('/storage-facilities/{id}/info_edit', [AdminController::class, 'edit'
 Route::put('/storage-facilities/{id}', [AdminController::class, 'update'])->name('storage-facilities.update');
 Route::delete('/storage-facilities/{id}', [AdminController::class, 'destroy'])->name('storage-facilities.destroy');
 
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
+
+Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking');
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
 require __DIR__.'/auth.php';
 

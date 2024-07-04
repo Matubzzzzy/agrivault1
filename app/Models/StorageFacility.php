@@ -15,5 +15,13 @@ class StorageFacility extends Model
         'location',
         'description',
         'contacts',
+        'county', 
+        'slots_available', 
+        'image'
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'facility_id');
+    }
 }

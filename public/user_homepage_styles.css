@@ -8,13 +8,25 @@ body, h1, h2, h3, p, ul, li, a, nav, form, input, textarea, label {
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f8f8f8;
+    background-color: #f4f4f4;
 }
+
+nav {
+    background: #28a745; /* Green background for navigation */
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    border-radius: 5px;
 }
 
 header {
@@ -70,4 +82,110 @@ form button {
 
 form button:hover {
     background-color: #555;
+}
+
+/* new code */
+
+
+
+
+
+
+
+.nav-left h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-right button, .nav-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background: #fff;
+    color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-right button:hover {
+    background: #218838;
+    color: #fff;
+}
+
+.search-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.search-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.facility {
+    background: #fff;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.facility img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.facility h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.facility p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.facility .btn {
+    display: inline-block;
+    background: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}
+
+.facility .btn:hover {
+    background: #218838;
+}
+
+footer {
+    background: #28a745; /* Green background for footer */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.location-dropdown {
+    margin: 1em 0; /* Spacing around dropdown */
+    max-width: 600px; /* Limit dropdown width */
+    margin: 0 auto; /* Center dropdown */
+}
+
+.location-dropdown label {
+    color: #2c6e49; /* Green color for label */
+    margin-right: 10px; /* Space between label and dropdown */
+}
+
+.location-dropdown select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Full width dropdown */
 }

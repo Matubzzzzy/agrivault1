@@ -31,10 +31,53 @@
             <div class="content">
                 <h1>We help connect you to reliable agricultural storage solutions.</h1>
                 <p>Join us today and explore a variety of storage options tailored to meet your needs.</p>
+                <p>To make a booking, please create an account</p>
                 <a href="{{ route('register') }}" class="btn">Start using AgriVault</a>
             </div>
         </section>
+
+        <section class="search-section">
+            <h2>Take a look at the locations we are in partnership with.</h2>
+            <!-- <h3>To make a booking please create an account</h3>
+            <a href="{{ route('register') }}" class="btn">Start using AgriVault</a> -->
+    
+    <!-- Dropdown menu for locations -->
+            <div class="location-dropdown">
+                <label for="location">Select Location:</label>
+                <select id="location" onchange="filterFacilities(this.value)">
+                    <option value="">All Locations</option>
+                    @foreach($locations as $location)
+                        <option value="{{ $location }}">{{ $location }}</option>
+                    @endforeach
+                </select>
+            </div>
+    
+            <div id="facilities-list">
+                @if($facilities->isEmpty())
+                    <p>{{ __('No facilities available.') }}</p>
+                @else
+                    <div class="facilities-container">
+                        @foreach($facilities as $facility)
+                            <div class="facility" data-location="{{ $facility->location }}">
+                            <!--
+                                <img src="{{ asset('images/facility_placeholder.png') }}" alt="{{ $facility->name }}">
+                                <div>
+                                 -->
+                                    <h3>{{ $facility->name }}</h3>
+                                    <p>{{ $facility->location }}</p>
+                                    <p>{{ $facility->description }}</p>
+                                    <p>Contact: {{ $facility->contacts }}</p>
+                                    <hr>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </section>
+
         <section class="about-section">
+
             <div class="about-content">
                 <h2>About Us</h2>
                 <p>At AgriVault, our mission is to provide farmers with access to reliable storage solutions. We understand the importance of preserving the quality of agricultural products, and our platform offers a comprehensive directory of storage facilities across various regions. Our goal is to empower farmers by giving them the tools and resources they need to make informed decisions about their storage options.</p>

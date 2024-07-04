@@ -28,13 +28,22 @@
             @method('PUT')
             
                 
-                <input type="text" id="name" name="name" value="{{ $facility->name }}" required>
+                <input type="text" id="name" name="name" placeholder="Facility Name" value="{{ $facility->name }}" required>
             
-                <input type="text" id="location" name="location" value="{{ $facility->location }}" required>
+                <input type="text" id="location" name="location" placeholder="Facility Address" value="{{ $facility->location }}" required>
             
-                <textarea id="description" name="description" required>{{ $facility->description }}</textarea>
+                <textarea id="description" name="description" placeholder="Description" required>{{ $facility->description }}</textarea>
             
-                <input type="text" id="contacts" name="contacts" value="{{ $facility->contacts }}" required>
+                <input type="text" id="contacts" name="contacts" placeholder="Facility Contacts" value="{{ $facility->contacts }}" required>
+
+                <input type="text" id="county" name="county" placeholder="County" value="{{ $facility->county }}" required>
+
+                <input type="number" id="slots_available" name="slots_available" placeholder="Number of Available Slots" value="{{ $facility->slots_available }}" required>
+
+                <input type="file" id="image" name="image">
+                    @if($facility->image)
+                        <img src="{{ asset('storage/' . $facility->image) }}" alt="{{ $facility->name }}" width="100">
+                    @endif
             
             <button type="submit" class="btn btn-primary">Update Facility</button>
         </form>

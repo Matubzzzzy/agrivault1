@@ -53,6 +53,10 @@
         <input type="text" class="form-control" id="location" name="location" placeholder="Facility Address" required>
         <textarea class="form-control" id="description" name="description" placeholder="Description" required></textarea>
         <input type="text" class="form-control" id="contacts" name="contacts" placeholder="Facility Contact" required>
+        <input type="text" class="form-control" id="county" name="county" placeholder="County" required>
+        <input type="number" class="form-control" id="slots_available" name="slots_available" placeholder="Slots Available" required>
+        <input type="file" class="form-control" id="image" name="image">
+        
         <button type="submit" class="btn btn-primary">{{ __('Add Facility') }}</button>
     </form>
 
@@ -60,32 +64,33 @@
 
     <h3>{{ __('Existing Facilities') }}</h3>
     <div id="facilities-list">
-        
-        @if($facilities->isEmpty())
-            <p>{{ __('No facilities available.') }}</p>
-        @else
-            <div class="facilities-container">
-                @foreach($facilities as $facility)
-                    <div class="facility">
-                        <img src="{{ asset('images/facility_placeholder.png') }}" alt="{{ $facility->name }}">
-                        <div>
-                            <h3>{{ $facility->name }}</h3>
-                            <p>{{ $facility->location }}</p>
-                            <p>{{ $facility->description }}</p>
-                            <p>Contact: {{ $facility->contacts }}</p>
-                            <button href="javascript:void(0);" onclick="editFacility({{ $facility->id }})" class="btn btn-sm btn-warning">{{ __('Edit') }}</button>
-                            <form action="{{ route('storage-facilities.destroy', $facility->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
-                            </form>
-                            <hr>
-                        </div>
+    @if($facilities->isEmpty())
+        <p>{{ __('No facilities available.') }}</p>
+    @else
+        <div class="facilities-container">
+            @foreach($facilities as $facility)
+                <div class="facility">
+                    <img src="{{ $facility->image ? asset('storage/' . $facility->image) : asset('images/facility_placeholder.png') }}" alt="{{ $facility->name }}">
+                    <div>
+                        <h3>{{ $facility->name }}</h3>
+                        <p>{{ $facility->location }}</p>
+                        <p>County: {{ $facility->county }}</p>
+                        <p>Slots Available: {{ $facility->slots_available }}</p>
+                        <p>{{ $facility->description }}</p>
+                        <p>Contact: {{ $facility->contacts }}</p>
+                        <button onclick="window.location.href='{{ route('storage-facilities.edit', $facility->id) }}'" class="btn btn-sm btn-warning">{{ __('Edit') }}</button>
+                        <form action="{{ route('storage-facilities.destroy', $facility->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
+                        </form>
+                        <hr>
                     </div>
-                @endforeach
-            </div>
-        @endif
-    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+</div>
 </section>
 
     

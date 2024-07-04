@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\StorageFacility;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        $facilities = StorageFacility::all(); // Adjust as per your query needs
+        $locations = StorageFacility::distinct('county')->pluck('county'); // Get distinct counties for dropdown
+
+    return view('home', compact('facilities', 'locations')); // Assuming 'home' is the user homepage view
+    
     }
 }
