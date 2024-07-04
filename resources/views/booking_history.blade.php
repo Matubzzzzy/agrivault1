@@ -15,7 +15,6 @@
         <a href="#" onclick="history.back(); return false;" class="navbar-link">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
-
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -32,62 +31,70 @@
     </nav>
 
     <div class="container mt-4">
-        <h2>Your Booking History</h2>
+    <h2>Your Booking History</h2>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-        @foreach($bookings as $booking)
-            <div class="booking">
+    @foreach($bookings as $booking)
+        <div class="booking d-flex justify-content-between align-items-center">
+            <div>
                 <h3>{{ $booking->facility->name }}</h3>
-                <p>Status: {{ $booking->status }}</p>
-                @if ($booking->status == 'closed')
-                    <button class="btn btn-green" data-toggle="modal" data-target="#reviewModal" data-booking-id="{{ $booking->id }}">Leave a Review</button>
+                @if ($booking->review_rating && $booking->review_text)
+                    <div class="review">
+                        <p><strong>Rating:</strong> {{ $booking->review_rating }}/5</p>
+                        <p><strong>Review:</strong> {{ $booking->review_text }}</p>
+                    </div>
                 @endif
             </div>
-        @endforeach
+            <div>
+                <button class="btn btn-green" data-toggle="modal" data-target="#reviewModal" data-booking-id="{{ $booking->id }}">Leave a Review</button>
+            </div>
+        </div>
+    @endforeach
 
-        <!-- Review Modal -->
-        <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-green text-white">
-                        <h5 class="modal-title" id="reviewModalLabel">Submit Review</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="{{ route('user.review.submit') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <input type="hidden" name="booking_id" id="booking_id" value="">
-                            <div class="form-group">
-                                <label for="rating">Rating</label>
-                                <select name="rating" id="rating" class="form-control" required>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="review">Review</label>
-                                <textarea name="review" id="review" class="form-control" rows="3" required></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-green">Submit Review</button>
-                        </div>
-                    </form>
+    <!-- Review Modal -->
+    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-green text-white">
+                    <h5 class="modal-title" id="reviewModalLabel">Submit Review</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form action="{{ route('user.review.submit') }}" method="POST">
+    @csrf
+    <div class="modal-body">
+        <input type="hidden" name="booking_id" id="booking_id" value="">
+        <div class="form-group">
+            <label for="rating">Rating</label>
+            <select name="rating" id="rating" class="form-control" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="review">Review</label>
+            <textarea name="review" id="review" class="form-control" rows="3" required></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-green">Submit Review</button>
+    </div>
+</form>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- Footer -->
     <footer class="footer bg-green text-white text-center mt-4">

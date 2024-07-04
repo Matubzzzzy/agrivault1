@@ -38,6 +38,9 @@ h2 {
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .booking h3 {
@@ -74,6 +77,11 @@ h2 {
     background-color: #dff0d8;
     border-color: #d0e9c6;
     color: #3c763d;
+}
+
+/* Review styles */
+.review {
+    margin-top: 10px;
 }
 
 /* Modal Styles */

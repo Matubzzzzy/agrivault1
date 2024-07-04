@@ -42,38 +42,37 @@
             <a href="{{ route('register') }}" class="btn">Start using AgriVault</a> -->
     
     <!-- Dropdown menu for locations -->
-            <div class="location-dropdown">
-                <label for="location">Select Location:</label>
-                <select id="location" onchange="filterFacilities(this.value)">
-                    <option value="">All Locations</option>
-                    @foreach($locations as $location)
-                        <option value="{{ $location }}">{{ $location }}</option>
+        <div class="location-dropdown">
+            <label for="location">Select Location:</label>
+            <select id="location" onchange="filterFacilities(this.value)">
+                <option value="">All Locations</option>
+                @foreach($locations as $location)
+                    <option value="{{ $location }}">{{ $location }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div id="facilities-list">
+            @if($facilities->isEmpty())
+                <p>{{ __('No facilities available.') }}</p>
+            @else
+                <div class="facilities-container">
+                    
+                    @foreach($facilities as $facility)
+                        <div class="facility" data-location="{{ $facility->county }}">
+                            <h3>{{ $facility->name }}</h3>
+                            <p>{{ $facility->county }}</p>
+                            <p>{{ $facility->description }}</p>
+                            <p>Contact: {{ $facility->contacts }}</p>
+                            <hr>
+                        </div>
+                        
                     @endforeach
-                </select>
-            </div>
-    
-            <div id="facilities-list">
-                @if($facilities->isEmpty())
-                    <p>{{ __('No facilities available.') }}</p>
-                @else
-                    <div class="facilities-container">
-                        @foreach($facilities as $facility)
-                            <div class="facility" data-location="{{ $facility->location }}">
-                            <!--
-                                <img src="{{ asset('images/facility_placeholder.png') }}" alt="{{ $facility->name }}">
-                                <div>
-                                 -->
-                                    <h3>{{ $facility->name }}</h3>
-                                    <p>{{ $facility->location }}</p>
-                                    <p>{{ $facility->description }}</p>
-                                    <p>Contact: {{ $facility->contacts }}</p>
-                                    <hr>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-            </div>
+                    
+                </div>
+            @endif
+        </div>
+
         </section>
 
         <section class="about-section">
@@ -167,6 +166,20 @@
             menuIcon.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
             });
+
+            function filterFacilities(county) {
+                let facilities = document.querySelectorAll('.facility');
+        
+                facilities.forEach(function(facility) {
+                    let dataLocation = facility.getAttribute('data-location');
+                    if (county === '' || dataLocation === county) {
+                        facility.style.display = 'block';
+                    } else {
+                        facility.style.display = 'none';
+                    }
+                });
+            }
+
         </script>
     </body>
 </html>

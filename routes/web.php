@@ -141,7 +141,8 @@ Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.st
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/booking_history', [UserController::class, 'bookingHistory'])->name('booking.history');
-    Route::post('/user/review', [UserController::class, 'submitReview'])->name('user.review.submit');
+    Route::post('/user/review/submit', [UserController::class, 'submitReview'])->name('user.review.submit');
+
 });
 
 require __DIR__.'/auth.php';

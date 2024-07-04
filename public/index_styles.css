@@ -258,6 +258,10 @@ body {
     .how-steps {
         flex-direction: column;
     }
+
+    .facility {
+        width: 100%; /* Full width on smaller screens */
+    }
 }
 
 /* Footer Section CSS */
@@ -392,10 +396,21 @@ footer#agrivault-footer .footer-links a:hover {
     justify-content: space-around; /* Stretch out facilities */
 }
 
+.facilities-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between facilities */
+}
+
 .facility {
-   padding: 40px 20px;
+   /* padding: 40px 20px; */
     background: #f4f4f4;
     text-align: left;
+    width: calc(50% - 10px); /* 50% width minus gap */
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 

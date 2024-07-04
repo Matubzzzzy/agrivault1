@@ -30,15 +30,15 @@ class UserController extends Controller
     {
         $request->validate([
             'booking_id' => 'required|exists:bookings,id',
-            'rating' => 'required|integer|min=1|max=5',
-            'review' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
+            'review' => 'required|string|min:10', // Ensure the review is at least 10 characters long
         ]);
 
-        $booking = Booking::find($request->booking_id);
+        $booking = Booking::findOrFail($request->booking_id);
         $booking->review_rating = $request->rating;
         $booking->review_text = $request->review;
         $booking->save();
 
-        return redirect()->route('user.booking.history')->with('success', 'Review submitted successfully.');
+        return redirect()->back()->with('success', 'Review submitted successfully!');
     }
 }

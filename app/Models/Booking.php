@@ -17,7 +17,6 @@ class Booking extends Model
         'phone',
         'slots',
         'info',
-        'status',
         'review_rating',
         'review_text',
     ];

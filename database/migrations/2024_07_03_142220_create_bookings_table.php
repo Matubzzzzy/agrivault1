@@ -23,6 +23,8 @@ class CreateBookingsTable extends Migration
             $table->integer('slots');
             $table->text('info');
             $table->timestamps();
+            $table->integer('review_rating')->nullable();
+            $table->text('review_text')->nullable();
         });
     }
 
