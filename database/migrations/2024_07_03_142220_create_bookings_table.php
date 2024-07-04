@@ -16,6 +16,8 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('facility_id')->constrained('storage_facilities')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('username');
             $table->string('email');
             $table->string('phone');
             $table->integer('slots');
@@ -34,3 +36,5 @@ class CreateBookingsTable extends Migration
         Schema::dropIfExists('bookings');
     }
 }
+
+

@@ -136,8 +136,13 @@ Route::delete('/storage-facilities/{id}', [AdminController::class, 'destroy'])->
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
-Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking');
+Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/booking_history', [UserController::class, 'bookingHistory'])->name('booking.history');
+    Route::post('/user/review', [UserController::class, 'submitReview'])->name('user.review.submit');
+});
 
 require __DIR__.'/auth.php';
 

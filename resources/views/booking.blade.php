@@ -1,3 +1,4 @@
+<!-- resources/views/booking.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +39,16 @@
             </div>
         @else
             <div id="booking-form-section">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        
+                    </div>
+                @endif
+
                 <form id="bookingForm" action="{{ route('bookings.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="facility_id" value="{{ $facility->id }}">
@@ -50,7 +61,7 @@
 
                     <div class="form-group">
                         <label for="slots">Number of Slots:</label>
-                        <input type="number" id="slots" name="slots" min="1" required>
+                        <input type="number" id="slots" name="slots" min="1" max="{{ $facility->slots_available }}" required>
                     </div>
 
                     <label for="info">Information About Your Request:</label>

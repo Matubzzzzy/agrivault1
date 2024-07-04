@@ -1,0 +1,140 @@
+/* Custom Styles for User History Page */
+
+body {
+    background-color: #f9f9f9; /* Off-white background */
+    color: #333; /* Dark text color */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+}
+
+.bg-green {
+    background-color: #2a7f36 !important; /* Green background */
+}
+
+.navbar-brand {
+    color: #fff !important; /* White color for AgriVault name */
+}
+
+.nav-link {
+    color: #fff !important; /* White color for navbar links */
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #000; /* Black color for container text */
+    flex: 1; /* Allow container to expand to fill remaining space */
+}
+
+h2 {
+    color: #2a7f36; /* Green color for headings */
+}
+
+.booking {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.booking h3 {
+    color: #2a7f36; /* Green color for facility name */
+}
+
+.booking p {
+    margin: 0;
+    font-size: 14px;
+    color: #000; /* Black color for booking text */
+}
+
+.btn-primary, .btn-green {
+    background-color: #2a7f36 !important;
+    border-color: #2a7f36 !important;
+}
+
+.btn-primary:hover, .btn-green:hover {
+    background-color: #256b2d !important;
+    border-color: #256b2d !important;
+}
+
+.btn-success {
+    background-color: #2a7f36;
+    border-color: #2a7f36;
+}
+
+.btn-success:hover {
+    background-color: #256b2d;
+    border-color: #256b2d;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d0e9c6;
+    color: #3c763d;
+}
+
+/* Modal Styles */
+.modal-header {
+    background-color: #2a7f36;
+    color: #fff;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #e9e9e9;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.form-group label {
+    color: #000; /* Black color for form labels */
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #f9f9f9; /* Off-white background for footer */
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+}
+
+.footer .contact-info {
+    background-color: #2a7f36; /* Green background for contact info */
+    color: #fff; /* White font color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a7f36;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #256b2d;
+}

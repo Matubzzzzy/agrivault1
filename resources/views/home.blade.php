@@ -13,6 +13,7 @@
         </div>
         <div class="nav-right">
             <a href="{{ route('profile.edit') }}" class="nav-button">Profile</a>
+            <a href="{{ route('booking.history') }}" class="nav-button">Booking History</a>
             <button id="sleep">Sleep</button>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf

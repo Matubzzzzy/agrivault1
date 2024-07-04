@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Booking;
 use App\Models\StorageFacility;
+use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
+
 
 class BookingController extends Controller
 {
@@ -16,7 +18,7 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'facility_id' => 'required|exists:storage_facilities,id',
             'email' => 'required|email',
             'phone' => 'required',
@@ -24,25 +26,29 @@ class BookingController extends Controller
             'info' => 'required',
         ]);
 
-        $facility = StorageFacility::findOrFail($request->facility_id);
+        $facility = StorageFacility::findOrFail($validatedData['facility_id']);
+        $user = Auth::user();
 
-        if ($facility->available_slots < $request->slots) {
+        if ($facility->slots_available < $validatedData['slots']) {
             return redirect()->back()->with('error', 'Not enough available slots.');
         }
 
-        // Store the booking request
         Booking::create([
-            'facility_id' => $request->facility_id,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'slots' => $request->slots,
-            'info' => $request->info,
+            'facility_id' => $validatedData['facility_id'],
+            'user_id' => $user->id,
+            'username' => $user->name,
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'slots' => $validatedData['slots'],
+            'info' => $validatedData['info'],
         ]);
 
         // Update available slots
-        $facility->available_slots -= $request->slots;
+        $facility->slots_available -= $validatedData['slots'];
         $facility->save();
 
-        return redirect()->route('booking.show', $facility->id)->with('success', 'Booking request submitted successfully.');
+        return redirect('home')->with('success', 'Booking request submitted successfully.');
     }
 }
+
+

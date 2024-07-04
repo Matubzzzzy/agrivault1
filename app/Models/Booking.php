@@ -11,11 +11,21 @@ class Booking extends Model
 
     protected $fillable = [
         'facility_id',
+        'user_id',
+        'username',
         'email',
         'phone',
         'slots',
         'info',
+        'status',
+        'review_rating',
+        'review_text',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function facility()
     {
