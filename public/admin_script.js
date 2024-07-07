@@ -99,6 +99,8 @@ document.getElementById('add-facility-form').addEventListener('submit', function
     // Allow the form to be submitted to the server
 });
 
+
+
 // Remove these calls to avoid using example data
 // renderFacilities();
 // renderRequests();

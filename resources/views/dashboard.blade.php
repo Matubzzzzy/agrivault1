@@ -96,7 +96,55 @@
     
     <section id="user-requests-section" class="hidden">
         <h2>User Requests</h2>
-        <div id="requests-list"></div>
+        <div id="requests-list">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @foreach($bookings as $booking)
+            <div class="booking">
+                <h3>{{ $booking->facility->name }}</h3>
+                <p>Username: {{ $booking->user->name }}</p>
+                <p>Email: {{ $booking->email }}</p>
+                <p>Phone: {{ $booking->phone }}</p>
+                <p>Info: {{ $booking->info }}</p>
+                <button class="btn btn-green" data-toggle="modal" data-target="#invoiceModal" data-booking-id="{{ $booking->id }}">Generate Invoice</button>
+            </div>
+        @endforeach
+
+        <!-- Invoice Modal -->
+        <div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-green text-white">
+                        <h5 class="modal-title" id="invoiceModalLabel">Generate Invoice</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('admin.generateInvoice') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" name="booking_id" id="booking_id" value="">
+                            <p>Generate an invoice for this booking.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-green">Generate Invoice</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
     </section>
     
     <!-- <footer>
@@ -104,5 +152,16 @@
     </footer> -->
 
     <script src="admin_script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $('#invoiceModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var bookingId = button.data('booking-id');
+            var modal = $(this);
+            modal.find('.modal-body #booking_id').val(bookingId);
+        });
+    </script>
 </body>
 </html>

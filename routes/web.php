@@ -14,6 +14,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StorageFacilityController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\ReviewController;
 
 
 /*
@@ -133,6 +135,9 @@ Route::post('/storage-facilities', [AdminController::class, 'store'])->name('sto
 Route::get('/storage-facilities/{id}/info_edit', [AdminController::class, 'edit'])->name('storage-facilities.edit');
 Route::put('/storage-facilities/{id}', [AdminController::class, 'update'])->name('storage-facilities.update');
 Route::delete('/storage-facilities/{id}', [AdminController::class, 'destroy'])->name('storage-facilities.destroy');
+Route::get('/dashboard', [AdminController::class, 'viewDashboard'])->name('admin.dashboard');
+Route::post('/admin/generate-invoice', [AdminController::class, 'generateInvoice'])->name('admin.generateInvoice');
+
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
@@ -142,8 +147,14 @@ Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.st
 Route::middleware(['auth'])->group(function () {
     Route::get('/booking_history', [UserController::class, 'bookingHistory'])->name('booking.history');
     Route::post('/user/review/submit', [UserController::class, 'submitReview'])->name('user.review.submit');
-
 });
+
+Route::post('/favorites/add', [FavoritesController::class, 'add'])->name('favorites.add');
+Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites');
+Route::delete('favorites/remove/{facility}', [FavoritesController::class, 'removeFromFavorites'])->name('favorites.remove');
+Route::post('/favorites/review-submit', [ReviewController::class, 'submitReview'])->name('favorites.review.submit');
+
+
 
 require __DIR__.'/auth.php';
 

@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
+        $facilities = StorageFacility::with('reviews')->get();
         $facilities = StorageFacility::all(); // Adjust as per your query needs
         $locations = StorageFacility::distinct('county')->pluck('county'); // Get distinct counties for dropdown
 

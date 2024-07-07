@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\StorageFacility;
+use App\Models\Booking;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -82,7 +83,7 @@ class AdminController extends Controller
     ]);
         
 
-        return redirect()->route('dashboard')->with('success', 'Storage facility updated successfully.');
+        return redirect('dashboard')->with('success', 'Storage facility updated successfully.');
     }
 
     public function destroy($id)
@@ -91,6 +92,13 @@ class AdminController extends Controller
         $facility->delete();
 
         return redirect()->route('dashboard')->with('success', 'Storage facility deleted successfully.');
+    }
+
+    public function viewDashboard()
+    {
+        $facilities = StorageFacility::all();
+        $bookings = Booking::with(['user', 'facility'])->get();
+        return view('dashboard', compact('facilities', 'bookings'));
     }
 }
 
