@@ -31,9 +31,15 @@
             <label for="county">Select County:</label>
             <select id="county" onchange="filterFacilities(this.value)">
                 <option value="">All Counties</option>
-                @foreach($facilities as $facility)
-                    <option value="{{ $facility->county }}">{{ $facility->county }}</option>
-                @endforeach
+                @php
+                    $counties = [];
+                    foreach ($facilities as $facility) {
+                        if (!in_array($facility->county, $counties)) {
+                            $counties[] = $facility->county;
+                            echo '<option value="' . $facility->county . '">' . $facility->county . '</option>';
+                        }
+                    }
+                @endphp
             </select>
         </div>
         
@@ -54,7 +60,7 @@
                             <form action="{{ route('favorites.add') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="facility_id" value="{{ $facility->id }}">
-                                <button href="{{ route('favorites.add', ['id' => $facility->id]) }}" class="btn btn-primary">{{ __('Add to Favorites') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Add to Favorites') }}</button>
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#reviewModal{{ $facility->id }}">{{ __('Reviews') }}</button>
                             </form>
                             

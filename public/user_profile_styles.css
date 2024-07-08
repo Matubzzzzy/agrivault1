@@ -88,19 +88,17 @@ body {
     border: 5px solid #fff;
     border-radius: 50%;
     overflow: hidden;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
 
 .profile-picture {
-    width: 150px;  /* Set the width to the desired size */
-    height: 150px; /* Set the height to the desired size */
-    border-radius: 50%; /* Make it a circle */
+    width: 100%;  /* Ensure the image covers the wrapper */
+    height: 100%; /* Ensure the image covers the wrapper */
     object-fit: cover;  /* Ensure the image covers the area */
     object-position: center; /* Center the image */
-    overflow: hidden; /* Ensure the image does not overflow */
 }
 
 .profile-picture-wrapper:hover {
@@ -190,4 +188,18 @@ button:hover {
 .footer-content {
     width: 80%;
     margin: 0 auto;
+}
+
+#add-facility-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#add-facility-form input, #add-facility-form button, #add-facility-form textarea {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    border: 1px solid #66BB6A;
+    border-radius: 5px;
 }

@@ -18,6 +18,22 @@ document.getElementById('save-picture').addEventListener('click', function() {
     }
 });
 
+document.getElementById('profile_picture').addEventListener('change', function() {
+    const fileInput = this;
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.querySelector('.profile-picture').src = e.target.result;
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+});
+
+// Make the profile picture wrapper clickable
+document.querySelector('.profile-picture-wrapper').addEventListener('click', function() {
+    document.getElementById('profile_picture').click();
+});
+
 document.getElementById('change-password-button').addEventListener('click', function() {
     window.location.href = 'change-password.html';
 });

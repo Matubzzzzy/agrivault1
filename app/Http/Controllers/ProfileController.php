@@ -43,15 +43,13 @@ class ProfileController extends Controller
         }
         
         if ($request->hasFile('profile_picture')) {
-            // Delete the old profile picture if it exists
+            // Delete old profile picture if it exists
             if ($user->profile_picture) {
-                Storage::delete($user->profile_picture);
+                Storage::delete('public/' . $user->profile_picture);
             }
-
+    
             // Store the new profile picture
-            $path = $request->file('profile_picture')->store('profile_pictures');
-
-            // Update the user's profile picture path in the database
+            $path = $request->file('profile_picture')->store('profile_pictures', 'public');
             $user->profile_picture = $path;
         }
 
