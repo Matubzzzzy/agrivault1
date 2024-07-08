@@ -94,37 +94,7 @@ php artisan migrate
 
 
 ## Project Structure
-AgriVault/
-├─ app/
-│  ├─ Console/
-│  ├─ Exceptions/
-│  ├─ Http/
-│  ├─ Models/
-│  ├─ Providers/
-├─ bootstrap/
-│  ├─ app.php
-│  ├─ cache/
-├─ config/
-├─ database/
-├─ public/
-├─ routes/
-├─ storage/
-├─ tests/
-├─ .editorconfig
-├─ .env.example
-├─ .gitatributes
-├─ .gitignore
-├─ READme.md
-├─ artisan
-├─ composer.json
-├─ package-lock.json
-├─ package.json
-├─ phpunit.xml
-├─ postcss.config.js
-├─ tailwind.config.js
-├─ vite.config.js
-├─ Concole/
-├─ resources/
+![README](https://github.com/ClarissaKobusingye/FREECODECAMP/assets/84726361/e7ce55a8-38e9-4228-8bad-2d27b969f7d1)
 
 
 ## License
