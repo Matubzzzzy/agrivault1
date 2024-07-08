@@ -6,33 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBookingsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('facility_id')->constrained('storage_facilities')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('username');
+            $table->foreignId('facility_id')->constrained('storage_facilities')->onDelete('cascade');
+            $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->integer('slots');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->text('info');
             $table->timestamps();
-            $table->integer('review_rating')->nullable();
-            $table->text('review_text')->nullable();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('bookings');

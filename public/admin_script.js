@@ -17,6 +17,12 @@ function showSection(sectionId) {
     document.getElementById(sectionId).classList.remove('hidden');
 }
 
+document.getElementById('add-facility-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Form successfully submitted');
+    this.submit();
+});
+
 // Remove or comment out example data
 // let facilities = [
 //     { name: 'Green Acres Storage', address: '123 Green St', contact: 'info@greenacres.com', imgSrc: 'image1.jpg' },

@@ -11,47 +11,34 @@
     <nav>
         <div class="nav-left">
             <h1>AgriVault Admin</h1>
-            <a href="#" onclick="history.back(); return false;" class="navbar-link">
+            <a href="{{ url('/dashboard') }}" class="navbar-link">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
         </div>
-        <div class="nav-right">
-            
-            
-        </div>
+        <div class="nav-right"></div>
     </nav>
 
     <section>
         <h2>Edit Facility</h2>
-        <form id="add-facility-form" method="POST" action="{{ route('storage-facilities.update', $facility->id) }}">
+        <form id="add-facility-form" method="POST" action="{{ route('storage-facilities.update', $facility->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            
-                
-                <input type="text" id="name" name="name" placeholder="Facility Name" value="{{ $facility->name }}" required>
-            
-                <input type="text" id="location" name="location" placeholder="Facility Address" value="{{ $facility->location }}" required>
-            
-                <textarea id="description" name="description" placeholder="Description" required>{{ $facility->description }}</textarea>
-            
-                <input type="text" id="contacts" name="contacts" placeholder="Facility Contacts" value="{{ $facility->contacts }}" required>
-
-                <input type="text" id="county" name="county" placeholder="County" value="{{ $facility->county }}" required>
-
-                <input type="number" id="slots_available" name="slots_available" placeholder="Number of Available Slots" value="{{ $facility->slots_available }}" required>
-
-                <input type="file" id="image" name="image">
-                    @if($facility->image)
-                        <img src="{{ asset('storage/' . $facility->image) }}" alt="{{ $facility->name }}" width="100">
-                    @endif
-            
+            <input type="text" id="name" name="name" placeholder="Facility Name" value="{{ $facility->name }}" required>
+            <input type="text" id="location" name="location" placeholder="Facility Address" value="{{ $facility->location }}" required>
+            <textarea id="description" name="description" placeholder="Description" required>{{ $facility->description }}</textarea>
+            <input type="text" id="contacts" name="contacts" placeholder="Facility Contacts" value="{{ $facility->contacts }}" required>
+            <input type="text" id="county" name="county" placeholder="County" value="{{ $facility->county }}" required>
+            <input type="number" id="slots_available" name="slots_available" placeholder="Number of Available Slots" value="{{ $facility->slots_available }}" required>
+            <input type="number" id="total_slots" name="total_slots" placeholder="Total Slots" value="{{ $facility->total_slots }}" required>
+            <input type="file" id="image" name="image">
+            @if($facility->image)
+                <img src="{{ asset('storage/' . $facility->image) }}" alt="{{ $facility->name }}" width="100">
+            @endif
             <button type="submit" class="btn btn-primary">Update Facility</button>
         </form>
     </section>
 
-    <footer>
-        <p>Contact Support: admin@agrivault.com | +123-456-7890</p>
-    </footer>
+    
 
     <script src="admin_script.js"></script>
 </body>

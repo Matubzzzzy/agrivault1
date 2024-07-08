@@ -55,13 +55,19 @@
                             <p>{{ $facility->location }}</p>
                             <p>{{ $facility->description }}</p>
                             <p>County: {{ $facility->county }}</p> <!-- Display county -->
-                            <p>Slots Available: {{ $facility->slots_available }}</p> <!-- Display slots available -->
+                            <p>Slots Available: {{ $facility->slots_available }} / {{ $facility->total_slots }}</p> <!-- Display slots available -->
                             <p>Contact: {{ $facility->contacts }}</p>
                             <form action="{{ route('favorites.add') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="facility_id" value="{{ $facility->id }}">
                                 <button type="submit" class="btn btn-primary">{{ __('Add to Favorites') }}</button>
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#reviewModal{{ $facility->id }}">{{ __('Reviews') }}</button>
+                            </form>
+                            <br>
+                            <form action="{{ route('bookings.create') }}" method="GET" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="facility_id" value="{{ $facility->id }}">
+                                <button type="submit" class="btn btn-success">{{ __('Make Booking') }}</button>
                             </form>
                             
                         </div>

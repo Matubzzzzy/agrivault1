@@ -13,14 +13,8 @@ class StorageFacility extends Model
 
     // Add the fillable property to allow mass assignment on these fields
     protected $fillable = [
-        'name',
-        'location',
-        'description',
-        'contacts',
-        'county', 
-        'slots_available', 
-        'image'
-    ];
+    'name', 'location', 'description', 'contacts', 'county', 'slots_available', 'total_slots', 'image'
+];
 
     public function bookings()
     {

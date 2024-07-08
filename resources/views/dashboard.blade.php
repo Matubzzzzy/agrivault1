@@ -55,6 +55,7 @@
         <input type="text" class="form-control" id="contacts" name="contacts" placeholder="Facility Contact" required>
         <input type="text" class="form-control" id="county" name="county" placeholder="County" required>
         <input type="number" class="form-control" id="slots_available" name="slots_available" placeholder="Slots Available" required>
+        <input type="number" class="form-control" id="total_slots" name="total_slots" placeholder="Total Slots" required>
         <input type="file" class="form-control" id="image" name="image">
         
         <button type="submit" class="btn btn-primary">{{ __('Add Facility') }}</button>
@@ -75,7 +76,7 @@
                         <h3>{{ $facility->name }}</h3>
                         <p>{{ $facility->location }}</p>
                         <p>County: {{ $facility->county }}</p>
-                        <p>Slots Available: {{ $facility->slots_available }}</p>
+                        <p>Slots Available: {{ $facility->slots_available }} / {{ $facility->total_slots }}</p>
                         <p>{{ $facility->description }}</p>
                         <p>Contact: {{ $facility->contacts }}</p>
                         <button onclick="window.location.href='{{ route('storage-facilities.edit', $facility->id) }}'" class="btn btn-sm btn-warning">{{ __('Edit') }}</button>
@@ -96,55 +97,7 @@
     
     <section id="user-requests-section" class="hidden">
         <h2>User Requests</h2>
-        <div id="requests-list">
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        @foreach($bookings as $booking)
-            <div class="booking">
-                <h3>{{ $booking->facility->name }}</h3>
-                <p>Username: {{ $booking->user->name }}</p>
-                <p>Email: {{ $booking->email }}</p>
-                <p>Phone: {{ $booking->phone }}</p>
-                <p>Info: {{ $booking->info }}</p>
-                <button class="btn btn-green" data-toggle="modal" data-target="#invoiceModal" data-booking-id="{{ $booking->id }}">Generate Invoice</button>
-            </div>
-        @endforeach
-
-        <!-- Invoice Modal -->
-        <div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-green text-white">
-                        <h5 class="modal-title" id="invoiceModalLabel">Generate Invoice</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="{{ route('admin.generateInvoice') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <input type="hidden" name="booking_id" id="booking_id" value="">
-                            <p>Generate an invoice for this booking.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-green">Generate Invoice</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        </div>
+        <div id="requests-list"></div>
     </section>
     
     <!-- <footer>

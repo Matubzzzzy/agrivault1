@@ -3,52 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\StorageFacility;
 use App\Models\Booking;
+use App\Models\StorageFacility;
 use Illuminate\Support\Facades\Auth;
-
 
 class BookingController extends Controller
 {
-    public function show($id)
-    {
-        $facility = StorageFacility::findOrFail($id);
-        return view('booking', compact('facility'));
-    }
-
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'facility_id' => 'required|exists:storage_facilities,id',
             'email' => 'required|email',
-            'phone' => 'required',
+            'phone' => 'required|string',
             'slots' => 'required|integer|min:1',
-            'info' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'info' => 'required|string',
         ]);
 
-        $facility = StorageFacility::findOrFail($validatedData['facility_id']);
-        $user = Auth::user();
+        $booking = new Booking();
+        $booking->user_id = Auth::id();
+        $booking->facility_id = $request->facility_id;
+        $booking->name = Auth::user()->name;
+        $booking->email = $request->email;
+        $booking->phone = $request->phone;
+        $booking->slots = $request->slots;
+        $booking->start_date = $request->start_date;
+        $booking->end_date = $request->end_date;
+        $booking->info = $request->info;
+        $booking->save();
 
-        if ($facility->slots_available < $validatedData['slots']) {
-            return redirect()->back()->with('error', 'Not enough available slots.');
-        }
+        return redirect()->back()->with('success', 'Your booking request has been submitted.');
+    }
 
-        Booking::create([
-            'facility_id' => $validatedData['facility_id'],
-            'user_id' => $user->id,
-            'username' => $user->name,
-            'email' => $validatedData['email'],
-            'phone' => $validatedData['phone'],
-            'slots' => $validatedData['slots'],
-            'info' => $validatedData['info'],
-        ]);
-
-        // Update available slots
-        $facility->slots_available -= $validatedData['slots'];
-        $facility->save();
-
-        return redirect('home')->with('success', 'Booking request submitted successfully.');
+    public function create(Request $request)
+    {
+        $facilityId = $request->input('facility_id');
+        $facility = StorageFacility::findOrFail($facilityId);
+    
+        return view('booking', compact('facility'));
     }
 }
+
 
 

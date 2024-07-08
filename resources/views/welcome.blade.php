@@ -31,7 +31,7 @@
             <div class="content">
                 <h1>We help connect you to reliable agricultural storage solutions.</h1>
                 <p>Join us today and explore a variety of storage options tailored to meet your needs.</p>
-                <p>To make a booking, please create an account</p>
+                <p>To see our full catalog, please create an account</p>
                 <a href="{{ route('register') }}" class="btn">Start using AgriVault</a>
             </div>
         </section>

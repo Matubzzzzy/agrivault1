@@ -1,4 +1,3 @@
-<!-- resources/views/booking.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +10,11 @@
     <nav>
         <div class="nav-left">
             <h1>AgriVault</h1>
-            <a href="#" onclick="history.back(); return false;" class="navbar-link">
+            <a href="{{ url('/home') }}" class="navbar-link">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
         </div>
-        <div class="nav-right">
-            <button id="profile">Profile</button>
-            <button id="sleep">Sleep</button>
-            <button id="logout">Logout</button>
-        </div>
+        
     </nav>
 
     <div class="container">
@@ -45,7 +40,21 @@
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-                        
+                        </ul>
+                    </div>
+                @endif
+
+                @if(session('success'))
+                    <div id="alert alert-success">
+                        <h2>Thank you for your request!</h2>
+                        <p>We will get back to you soon.</p>
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div id="error">
+                        <h2>Error</h2>
+                        <p>{{ session('error') }}</p>
                     </div>
                 @endif
 
@@ -54,15 +63,19 @@
                     <input type="hidden" name="facility_id" value="{{ $facility->id }}">
 
                     <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" required>
 
                     <label for="phone">Phone Number:</label>
                     <input type="tel" id="phone" name="phone" required>
 
-                    <div class="form-group">
-                        <label for="slots">Number of Slots:</label>
-                        <input type="number" id="slots" name="slots" min="1" max="{{ $facility->slots_available }}" required>
-                    </div>
+                    <label for="slots">Number of Slots:</label>
+                    <input type="number" id="slots" name="slots" min="1" max="{{ $facility->slots_available }}" required>
+
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date" required>
+
+                    <label for="end_date">End Date:</label>
+                    <input type="date" id="end_date" name="end_date" required>
 
                     <label for="info">Information About Your Request:</label>
                     <textarea id="info" name="info" required></textarea>
@@ -72,24 +85,10 @@
             </div>
         @endif
 
-        @if(session('success'))
-            <div id="confirmation">
-                <h2>Thank you for your request!</h2>
-                <p>We will get back to you soon.</p>
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div id="error">
-                <h2>Error</h2>
-                <p>{{ session('error') }}</p>
-            </div>
-        @endif
+        
     </div>
 
-    <footer>
-        Contact us: agrivault@example.com | +254-123456789
-    </footer>
+    
 
     <script src="{{ asset('script.js') }}"></script>
 </body>

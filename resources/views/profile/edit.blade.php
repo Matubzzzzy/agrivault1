@@ -62,13 +62,13 @@
                             </div>
 
                             <div class="mb-4">
-                                <x-input-label for="password" :value="__('Password')" />
+                                <x-input-label for="password" :value="__(' New Password')" />
                                 <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
 
                             <div class="mb-4">
-                                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                                <x-input-label for="password_confirmation" :value="__('Confirm New Password')" />
                                 <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
                                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                             </div>

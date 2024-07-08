@@ -31,7 +31,7 @@
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="role" id="facility" value="1">
                 <label class="form-check-label" for="facility">
-                    {{ __('Facility Admin') }}
+                    {{ __('Admin') }}
                 </label>
             </div>
 
