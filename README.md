@@ -92,9 +92,7 @@ php artisan migrate
 
 
 ## Project Structure
-![README](https://github.com/ClarissaKobusingye/FREECODECAMP/assets/84726361/98a407fd-bb82-4637-bb02-ee345361d9cf)
-
-
+![README](https://github.com/ClarissaKobusingye/Drug_Dispensor/assets/84726361/79d5fd6e-a262-4756-9874-dee6837c1e4b)
 
 ## License
 
