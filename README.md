@@ -1,8 +1,5 @@
 # AgriVault
 
-[![N|Solid](https://img.icons8.com/?size=100&id=lRjcvhvtR81o&format=png&color=000000)](https://laravel.com/)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 AgriVault is a platform aimed at facilitating the connection between farmers and storage facilities, providing a user-friendly interface for farmers to explore and access reliable agricultural storage options. 
 
@@ -53,6 +50,7 @@ laravel new AgriVault
 
 cd AgriVault
 php artisan serve
+npm run dev // to modify the program
 ```
 
 For Databse Setup...
@@ -94,37 +92,8 @@ php artisan migrate
 
 
 ## Project Structure
-AgriVault/
-├─ app/
-│  ├─ Console/
-│  ├─ Exceptions/
-│  ├─ Http/
-│  ├─ Models/
-│  ├─ Providers/
-├─ bootstrap/
-│  ├─ app.php
-│  ├─ cache/
-├─ config/
-├─ database/
-├─ public/
-├─ routes/
-├─ storage/
-├─ tests/
-├─ .editorconfig
-├─ .env.example
-├─ .gitatributes
-├─ .gitignore
-├─ READme.md
-├─ artisan
-├─ composer.json
-├─ package-lock.json
-├─ package.json
-├─ phpunit.xml
-├─ postcss.config.js
-├─ tailwind.config.js
-├─ vite.config.js
-├─ Concole/
-├─ resources/
+![README](https://github.com/ClarissaKobusingye/FREECODECAMP/assets/84726361/98a407fd-bb82-4637-bb02-ee345361d9cf)
+
 
 
 ## License
