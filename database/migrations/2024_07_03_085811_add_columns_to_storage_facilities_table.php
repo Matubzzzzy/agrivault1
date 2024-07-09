@@ -14,7 +14,6 @@ class AddColumnsToStorageFacilitiesTable extends Migration
         Schema::table('storage_facilities', function (Blueprint $table) {
             $table->string('county')->after('location');
             $table->integer('slots_available')->after('county');
-            $table->integer('total_slots');
             $table->string('image')->nullable()->after('total_slots'); // Assuming you store image path
         });
     }

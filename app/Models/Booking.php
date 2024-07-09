@@ -19,6 +19,7 @@ class Booking extends Model
         'start_date',
         'end_date',
         'info',
+        'total_price',
         
     ];
 

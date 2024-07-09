@@ -23,25 +23,21 @@ class AdminController extends Controller
             'description' => 'required|string',
             'contacts' => 'required|string|max:255',
             'county' => 'required|string|max:255',
-            'slots_available' => 'required|integer',
-            'image' => 'nullable|image|max:2048', // Validate image if present
+            'slots_available' => 'required|integer|min:1',
+            'total_slots' => 'required|integer|min:1',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public') : null;
+        $data = $request->all();
 
-        StorageFacility::create([
-            'name' => $request->input('name'),
-            'location' => $request->input('location'),
-            'description' => $request->input('description'),
-            'contacts' => $request->input('contacts'),
-            'county' => $request->input('county'),
-            'slots_available' => $request->input('slots_available'),
-            'image' => $imagePath,
-        ]);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('storage_images', 'public');
+        }
 
-        
+        StorageFacility::create($data);
 
-        return redirect()->route('dashboard')->with('success', 'Storage facility added successfully!');
+        return redirect()->route('storage-facilities.index')->with('success', 'Storage facility added successfully.');
     }
 
     public function edit($id)
@@ -59,29 +55,32 @@ class AdminController extends Controller
             'contacts' => 'required|string|max:255',
             'county' => 'required|string|max:255',
             'slots_available' => 'required|integer',
-            'image' => 'nullable|image|max:2048',
+            'total_slots' => 'required|integer|min:1',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $facility = StorageFacility::findOrFail($id);
         $imagePath = $facility->image;
 
-    if ($request->file('image')) {
-        if ($imagePath) {
-            Storage::disk('public')->delete($imagePath);
+        if ($request->file('image')) {
+            if ($imagePath) {
+                Storage::disk('public')->delete($imagePath);
+            }
+            $imagePath = $request->file('image')->store('storage_images', 'public');
         }
-        $imagePath = $request->file('image')->store('images', 'public');
-    }
 
-    $facility->update([
-        'name' => $request->input('name'),
-        'location' => $request->input('location'),
-        'description' => $request->input('description'),
-        'contacts' => $request->input('contacts'),
-        'county' => $request->input('county'),
-        'slots_available' => $request->input('slots_available'),
-        'image' => $imagePath,
-    ]);
-        
+        $facility->update([
+            'name' => $request->input('name'),
+            'location' => $request->input('location'),
+            'description' => $request->input('description'),
+            'contacts' => $request->input('contacts'),
+            'county' => $request->input('county'),
+            'slots_available' => $request->input('slots_available'),
+            'total_slots' => $request->input('total_slots'),
+            'price' => $request->input('price'),
+            'image' => $imagePath,
+        ]);
 
         return redirect('dashboard')->with('success', 'Storage facility updated successfully.');
     }
@@ -101,6 +100,3 @@ class AdminController extends Controller
         return view('dashboard', compact('facilities', 'bookings'));
     }
 }
-
-
-

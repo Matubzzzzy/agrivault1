@@ -15,6 +15,7 @@
         <div class="nav-right">
             <a href="{{ route('profile.edit') }}" class="nav-button">Profile</a>
             <a href="{{ route('favorites') }}" class="nav-button">Favorites</a>
+            <a href="{{ route('booking.history') }}" class="nav-button">Booking History</a>
             <button id="sleep">Sleep</button>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf
@@ -51,11 +52,13 @@
                 @foreach($facilities as $facility)
                     <div class="facility" data-location="{{ $facility->location }}">
                         <div>
+                        <img src="{{ $facility->image ? asset('storage/' . $facility->image) : asset('images/facility_placeholder.png') }}" alt="{{ $facility->name }}">
                             <h3>{{ $facility->name }}</h3>
                             <p>{{ $facility->location }}</p>
                             <p>{{ $facility->description }}</p>
                             <p>County: {{ $facility->county }}</p> <!-- Display county -->
                             <p>Slots Available: {{ $facility->slots_available }} / {{ $facility->total_slots }}</p> <!-- Display slots available -->
+                            <p>Price: Ksh.{{ $facility->price }} per slot</p>
                             <p>Contact: {{ $facility->contacts }}</p>
                             <form action="{{ route('favorites.add') }}" method="POST">
                                 @csrf
@@ -72,6 +75,7 @@
                             
                         </div>
                     </div>
+                    <br>
 
                     <!-- Reviews Modal -->
                     <div class="modal fade" id="reviewModal{{ $facility->id }}" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel{{ $facility->id }}" aria-hidden="true">

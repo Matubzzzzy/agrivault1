@@ -125,9 +125,10 @@ form button:hover {
 }
 
 .facility {
-    background: #fff;
-    border: 1px solid #ddd;
-    text-align: left;
+    background-color: white;
+    border: 1px solid #66BB6A;
+    border-radius: 5px;
+    padding: 20px;
 }
 
 .facility img {
@@ -136,6 +137,7 @@ form button:hover {
     object-fit: cover;
     border-bottom: 1px solid #ddd;
     margin-bottom: 15px;
+    /* align-items: right; */
 }
 
 .facility h3 {

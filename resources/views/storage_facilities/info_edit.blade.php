@@ -30,6 +30,7 @@
             <input type="text" id="county" name="county" placeholder="County" value="{{ $facility->county }}" required>
             <input type="number" id="slots_available" name="slots_available" placeholder="Number of Available Slots" value="{{ $facility->slots_available }}" required>
             <input type="number" id="total_slots" name="total_slots" placeholder="Total Slots" value="{{ $facility->total_slots }}" required>
+            <input type="number" id="price" name="price" placeholder="Price" value="{{ $facility->price }}" required>
             <input type="file" id="image" name="image">
             @if($facility->image)
                 <img src="{{ asset('storage/' . $facility->image) }}" alt="{{ $facility->name }}" width="100">

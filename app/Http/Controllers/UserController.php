@@ -7,6 +7,7 @@ use App\Models\StorageFacility;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Review;
 
 class UserController extends Controller
 {
@@ -27,18 +28,19 @@ class UserController extends Controller
     }
 
     public function submitReview(Request $request)
-    {
-        $request->validate([
-            'booking_id' => 'required|exists:bookings,id',
-            'rating' => 'required|integer|min:1|max:5',
-            'review' => 'required|string|min:10', // Ensure the review is at least 10 characters long
-        ]);
+{
+    $request->validate([
+        'facility_id' => 'required|exists:storage_facilities,id',
+        'rating' => 'required|integer|min:1|max:5',
+        'review' => 'required|string',
+    ]);
 
-        $booking = Booking::findOrFail($request->booking_id);
-        $booking->review_rating = $request->rating;
-        $booking->review_text = $request->review;
-        $booking->save();
+    Review::create([
+        'facility_id' => $request->facility_id,
+        'rating' => $request->rating,
+        'review' => $request->review,
+    ]);
 
-        return redirect()->back()->with('success', 'Review submitted successfully!');
-    }
+    return redirect()->back()->with('success', 'Review submitted successfully.');
+}
 }

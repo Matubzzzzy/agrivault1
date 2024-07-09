@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice Request Page</title>
+    <title>Booking Request Page</title>
     <link rel="stylesheet" href="{{ asset('booking_styles.css') }}">
 </head>
 <body>
@@ -24,7 +25,8 @@
             <h2>Facility Information</h2>
             <p>Facility Name: {{ $facility->name }}</p>
             <p>Location: {{ $facility->location }}</p>
-            <p>Available Slots: {{ $facility->slots_available }}</p>
+            <p>Available Slots: {{ $facility->slots_available }} / {{ $facility->total_slots }}</p>
+            <p>Price: Ksh.{{ $facility->price }} per slot</p>
         </div>
 
         @if($facility->slots_available < 1)
@@ -80,6 +82,14 @@
                     <label for="info">Information About Your Request:</label>
                     <textarea id="info" name="info" required></textarea>
 
+                    <!-- Total Price Section -->
+                    <div id="total-price-section">
+                        <h3>Total Price: <span id="total-price-display">0</span></h3>
+                        <p>(This price shall be paid on site.)</p>
+                    </div>
+                    <input type="hidden" id="total_price" name="total_price" value="0">
+                    <br>
+
                     <button type="submit">Submit Request</button>
                 </form>
             </div>
@@ -88,8 +98,28 @@
         
     </div>
 
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slotsInput = document.getElementById('slots');
+            const totalPriceElement = document.getElementById('total-price-display');
+            const totalPriceInput = document.getElementById('total_price');
+            const pricePerSlot = {{ $facility->price }};
 
-    <script src="{{ asset('script.js') }}"></script>
+            function updateTotalPrice() {
+                const numberOfSlots = parseInt(slotsInput.value) || 0;
+                const totalPrice = numberOfSlots * pricePerSlot;
+                totalPriceElement.textContent = totalPrice.toFixed(2);
+                totalPriceInput.value = totalPrice.toFixed(2);
+            }
+
+            slotsInput.addEventListener('input', updateTotalPrice);
+
+            // Initialize total price on page load
+            updateTotalPrice();
+        });
+    </script>
+
+
+    
 </body>
 </html>

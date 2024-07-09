@@ -56,6 +56,8 @@
         <input type="text" class="form-control" id="county" name="county" placeholder="County" required>
         <input type="number" class="form-control" id="slots_available" name="slots_available" placeholder="Slots Available" required>
         <input type="number" class="form-control" id="total_slots" name="total_slots" placeholder="Total Slots" required>
+        <input type="number" class="form-control" id="price" name="price" placeholder="Price" required>
+
         <input type="file" class="form-control" id="image" name="image">
         
         <button type="submit" class="btn btn-primary">{{ __('Add Facility') }}</button>
@@ -77,6 +79,7 @@
                         <p>{{ $facility->location }}</p>
                         <p>County: {{ $facility->county }}</p>
                         <p>Slots Available: {{ $facility->slots_available }} / {{ $facility->total_slots }}</p>
+                        <p>Price: Ksh.{{ $facility->price }} per slot</p>
                         <p>{{ $facility->description }}</p>
                         <p>Contact: {{ $facility->contacts }}</p>
                         <button onclick="window.location.href='{{ route('storage-facilities.edit', $facility->id) }}'" class="btn btn-sm btn-warning">{{ __('Edit') }}</button>

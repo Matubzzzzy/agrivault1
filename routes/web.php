@@ -145,6 +145,8 @@ Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.s
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
 
+Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/booking_history', [UserController::class, 'bookingHistory'])->name('booking.history');
