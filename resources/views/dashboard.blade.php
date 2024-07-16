@@ -40,7 +40,7 @@
             </div>
             <div class="stat">
                 <h3>Recent Requests</h3>
-                <p id="request-count">0</p>
+                <p id="request-count">{{ $bookings->count() }}</p>
             </div>
         </div>
     </section>
@@ -99,8 +99,30 @@
 
     
     <section id="user-requests-section" class="hidden">
-        <h2>User Requests</h2>
-        <div id="requests-list"></div>
+        <h2>Booking Requests</h2>
+        <div id="requests-list">
+        @if($bookings->isEmpty())
+                <p>No booking requests available.</p>
+            @else
+                <div class="bookings-container">
+                    @foreach($bookings as $booking)
+                        <div class="booking">
+                            <h3>{{ $booking->facility->name }}</h3>
+                            <p>Booking ID: {{ $booking->id }}</p>
+                            <p>User Name: {{ $booking->user->name }}</p>
+                            <p>Email: {{ $booking->user->email }}</p>
+                            <p>Phone: {{ $booking->phone }}</p>
+                            <p>Slots: {{ $booking->slots }}</p>
+                            <p>Total Price: Ksh.{{ $booking->total_price }}</p>
+                            <p>Start Date: {{ $booking->start_date }}</p>
+                            <p>End Date: {{ $booking->end_date }}</p>
+                            <p>Information: {{ $booking->info }}</p>
+                            <hr>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
     </section>
     
     <!-- <footer>

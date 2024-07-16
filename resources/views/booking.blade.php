@@ -101,18 +101,37 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const slotsInput = document.getElementById('slots');
+            const startDateInput = document.getElementById('start_date');
+            const endDateInput = document.getElementById('end_date');
             const totalPriceElement = document.getElementById('total-price-display');
-            const totalPriceInput = document.getElementById('total_price');
+            const totalPriceInput = document.createElement('input');
+            totalPriceInput.type = 'hidden';
+            totalPriceInput.name = 'total_price';
+            document.getElementById('bookingForm').appendChild(totalPriceInput);
+
             const pricePerSlot = {{ $facility->price }};
+
+            function calculateNumberOfDays(startDate, endDate) {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                const timeDiff = end - start;
+                const daysDiff = timeDiff / (1000 * 3600 * 24) + 1; // Include both start and end date
+                return daysDiff > 0 ? daysDiff : 0;
+            }
 
             function updateTotalPrice() {
                 const numberOfSlots = parseInt(slotsInput.value) || 0;
-                const totalPrice = numberOfSlots * pricePerSlot;
+                const startDate = startDateInput.value;
+                const endDate = endDateInput.value;
+                const numberOfDays = calculateNumberOfDays(startDate, endDate);
+                const totalPrice = numberOfSlots * pricePerSlot * numberOfDays;
                 totalPriceElement.textContent = totalPrice.toFixed(2);
                 totalPriceInput.value = totalPrice.toFixed(2);
             }
 
             slotsInput.addEventListener('input', updateTotalPrice);
+            startDateInput.addEventListener('change', updateTotalPrice);
+            endDateInput.addEventListener('change', updateTotalPrice);
 
             // Initialize total price on page load
             updateTotalPrice();
